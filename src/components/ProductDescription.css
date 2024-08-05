@@ -1,0 +1,218 @@
+/* ProductDescription.css */
+
+/* Global styles */
+:root {
+  --primary-color: #007bff;
+  --secondary-color: #e74c3c;
+  --neutral-light: #f0f0f0;
+  --neutral-dark: #333;
+  --background-light: #fff;
+  --shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+
+
+/* Container for the entire product description */
+.product-description-container {
+  max-width: 1200px; /* Adjust width for larger screens */
+  margin: 0 auto; /* Center align on larger screens */
+  padding: 20px;
+  background: linear-gradient(to right, var(--neutral-light), #d9f2e6);
+  margin-bottom: 40px; /* Added to ensure spacing before footer */
+  margin-top: 10px; 
+}
+
+/* Container for the main product details section */
+.product-details {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  background-color: var(--background-light);
+  border-radius: 10px;
+  padding: 20px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+}
+
+/* Image of the product */
+.product-image {
+  width: 300px;
+  height: auto;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  transition: transform 0.3s ease;
+}
+
+.product-image:hover {
+  transform: scale(1.05); /* Zoom effect on hover */
+}
+
+/* Container for product information */
+.product-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  max-width: 400px;
+}
+
+/* Tag or label for product category */
+.product-tag {
+  background-color: #cc33ff;
+  color: white;
+  padding: 5px 10px;
+  border-radius: 5px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+/* Container for pricing information */
+.product-pricing {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+/* Original price of the product (if applicable) */
+.original-price {
+  text-decoration: line-through;
+  margin-right: 10px;
+  color: #777;
+}
+
+/* Discounted price or current price of the product */
+.discounted-price {
+  color: var(--secondary-color);
+  font-size: 1.5em;
+  font-weight: bold;
+}
+
+/* Description or details about the product */
+.product-text {
+  margin-bottom: 20px;
+  line-height: 1.6;
+  text-align: justify;
+}
+
+/* Container for 'Add to Cart' section */
+.add-to-cart {
+  display: flex;
+  align-items: center;
+  margin-top: 10px;
+}
+
+/* Input field for quantity selection */
+.quantity-input {
+  width: 50px;
+  margin-right: 10px;
+  padding: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+/* Button to add the product to the cart */
+.add-to-cart-button {
+  background-color: var(--primary-color);
+  color: white;
+  padding: 12px 24px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.add-to-cart-button:hover {
+  background-color: #0056b3;
+}
+
+/* Container for related products section */
+.related-products {
+  text-align: center;
+  width: 100%;
+  margin-top: 40px;
+  margin-bottom: 40px; /* Added to ensure spacing before footer */
+}
+
+/* Title for related products section */
+.related-products h2 {
+  margin-bottom: 20px;
+  font-size: 24px;
+  color: var(--neutral-dark);
+}
+
+/* List of related products */
+.related-products-list {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  flex-wrap: wrap;
+  background-color: var(--background-light);
+  padding: 20px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px var(--shadow-color);
+  overflow: auto; /* Enable scrolling if items overflow */
+}
+
+/* Each related product item */
+.related-product-item {
+  flex: 0 0 calc(33.33% - 20px); /* Adjust width for smaller screens */
+  max-width: 300px; /* Limit max width for consistency */
+  text-align: center;
+  transition: transform 0.3s ease;
+  margin-bottom: 20px;
+}
+
+/* Image of each related product */
+.related-product-item img {
+  width: 100%; /* Ensure images fill their containers */
+  height: 200px; /* Fixed height for consistency */
+  object-fit: cover; /* Maintain aspect ratio */
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Styling for hover effect on related product items */
+.related-product-item:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .product-details {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .product-image {
+    width: 100%; /* Full width on smaller screens */
+    margin-bottom: 20px;
+  }
+
+  .product-info {
+    max-width: 100%; /* Full width on smaller screens */
+    text-align: center;
+  }
+
+  .related-products-list {
+    justify-content: flex-start;
+  }
+
+  .related-product-item {
+    flex: 0 0 calc(50% - 20px); /* Two items per row on smaller screens */
+    max-width: calc(50% - 20px);
+  }
+}
+
+/* Further adjustments for very small screens if needed */
+@media (max-width: 480px) {
+  .product-info {
+    font-size: 14px; /* Decrease font size for better readability */
+  }
+
+  .related-product-item {
+    flex: 0 0 100%; /* Full width for related products on very small screens */
+    max-width: 100%;
+  }
+}

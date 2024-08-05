@@ -1,0 +1,98 @@
+.carousel .carousel-item {
+  position: relative;
+  height: 500px;
+  width: 100%;
+}
+
+.carousel .carousel-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+/* Add an overlay to make the background dimmer */
+.carousel .carousel-item::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Adjust the alpha value for more or less dimming */
+  z-index: 1;
+  border-radius: 10px;
+}
+
+.carousel .banner-text {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffffff;
+  padding: 20px;
+  text-align: center;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px;
+  background: rgba(0, 0, 0, 0.6);
+  z-index: 2; /* Ensure text is above the overlay */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.carousel .banner-text h2 {
+  margin: 0 0 10px;
+  font-size: 32px;
+  font-weight: 700;
+  color: #ffffff; /* Make the text more white */
+}
+
+.carousel .banner-text p {
+  margin: 0 0 20px;
+  font-size: 18px;
+  line-height: 1.5;
+  color: #ffffff; /* Make the text more white */
+}
+
+.carousel .banner-text button {
+  background-color: rgba(255, 255, 255, 0.2);
+  border: 2px solid white;
+  padding: 10px 20px;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 25px;
+  transition: background-color 0.3s, color 0.3s;
+  z-index: 3; /* Ensure button is above the overlay */
+}
+
+.carousel .banner-text button:hover {
+  background-color: rgba(255, 255, 255, 0.4);
+  color: white;
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+  .carousel .carousel-item {
+    height: 300px;
+  }
+
+  .carousel .banner-text {
+    width: 80%;
+    max-width: 90%;
+    padding: 15px;
+  }
+
+  .carousel .banner-text h2 {
+    font-size: 24px;
+  }
+
+  .carousel .banner-text p {
+    font-size: 14px;
+  }
+
+  .carousel .banner-text button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}

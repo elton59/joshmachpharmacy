@@ -1,0 +1,17 @@
+.myOrdersContainer {
+    padding: 20px;
+}
+
+.orderItem {
+    border-bottom: 1px solid #ddd;
+    padding: 10px 0;
+}
+
+.orderItem span {
+    display: block;
+    margin: 5px 0;
+}
+
+.orderItem button {
+    margin-left: 10px;
+}

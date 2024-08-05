@@ -1,7 +1,13 @@
 .App {
   text-align: center;
+  font-family: Arial, sans-serif;
+  padding: 20px;
+  background: linear-gradient(to right, var(--neutral-light), #d9f2e6);
 }
-
+.products-container {
+  display: flex;
+  justify-content: space-around;
+}
 .App-logo {
   height: 40vmin;
   pointer-events: none;

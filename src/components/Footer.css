@@ -1,0 +1,15 @@
+.footer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(90deg, #e0eafc, #cfdef3); /* Elegant gradient */
+    color: #333333; /* Dark text for better contrast */
+    box-shadow: 0 -4px 15px rgba(0, 0, 0, 0.2); /* Subtle shadow */
+    padding: 10px 30px; /* Padding for spacing */
+    transition: background-color 0.3s; /* Smooth transition */
+    position: fixed;
+    width: 100%;
+    bottom: 0;
+    z-index: 10; /* Ensure it stays on top */
+  }
+  

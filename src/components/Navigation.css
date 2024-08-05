@@ -1,0 +1,94 @@
+:root {
+    --primary-color: #ff7f50; /* Coral */
+    --secondary-color: #ff6347; /* Tomato */
+    --accent-color: #20b2aa; /* LightSeaGreen */
+    --background-color: #f0f8ff; /* AliceBlue */
+    --text-color: #333;
+    --hover-color: #ff4500; /* OrangeRed */
+    --input-bg-color: #fff;
+    --input-border-color: #ccc;
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: var(--background-color);
+    padding: 15px 30px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.navigation:hover {
+    background-color: var(--background-color);
+}
+
+.categories span {
+    font-weight: bold;
+    color: var(--primary-color);
+    margin-right: 10px;
+    font-size: 18px;
+}
+
+.categories a {
+    margin: 0 10px;
+    text-decoration: none;
+    color: var(--secondary-color);
+    font-size: 16px;
+    transition: color 0.3s ease;
+}
+
+.categories a:hover {
+    color: var(--hover-color);
+    text-decoration: underline;
+}
+
+.search input {
+    padding: 7px 15px;
+    border: 1px solid var(--input-border-color);
+    border-radius: 20px;
+    background-color: var(--input-bg-color);
+    outline: none;
+    transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.search input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 5px rgba(255, 127, 80, 0.5); /* Coral */
+}
+
+/* Mobile view */
+@media (max-width: 768px) {
+    .navigation {
+        flex-direction: column;
+        padding: 20px;
+    }
+
+    .categories {
+        margin-bottom: 10px;
+        text-align: center;
+    }
+
+    .categories span {
+        display: block;
+        margin-bottom: 10px;
+    }
+
+    .categories a {
+        display: inline-block;
+        margin: 5px 10px;
+        font-size: 14px;
+    }
+
+    .search {
+        width: 100%;
+        display: flex;
+        justify-content: center;
+    }
+
+    .search input {
+        width: 80%;
+        max-width: 300px;
+    }
+}

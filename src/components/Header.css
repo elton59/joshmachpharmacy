@@ -1,0 +1,247 @@
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: linear-gradient(90deg, #e0eafc, #cfdef3);
+  color: #333333;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+  padding: 10px 30px;
+  transition: background-color 0.3s;
+  z-index: 10;
+  position: relative;
+}
+
+.logoTitle {
+  display: flex;
+  align-items: center;
+  margin-right: 40px;
+}
+
+.logo {
+  height: 80px;
+  width: 80px;
+  border-radius: 50%;
+  margin-right: 15px;
+  object-fit: cover;
+  border: 2px solid #fff;
+}
+
+.logoLink {
+  color: #333333;
+  text-decoration: none;
+  font-weight: bold;
+  font-size: 22px;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.desktopLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 40px;
+}
+
+.navLink {
+  color: #333333;
+  font-size: 16px;
+  transition: color 0.3s, border-bottom 0.3s;
+  text-decoration: none;
+  text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.navLink:hover {
+  color: #ff5722;
+  border-bottom: 2px solid #ff5722;
+}
+
+.iconContainer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 15px;
+}
+
+.iconButton {
+  color: #333333;
+  transition: color 0.3s;
+}
+
+.iconButton:hover {
+  color: #ff5722;
+}
+
+.cartDropdown {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  padding: 10px;
+  width: 300px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  z-index: 100;
+}
+
+.cartDropdown::before {
+  content: '';
+  position: absolute;
+  top: -10px;
+  right: 15px;
+  border-width: 0 10px 10px;
+  border-style: solid;
+  border-color: transparent transparent #fff;
+}
+
+.cartItem {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+  background-color: #f9f9f9;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+.cartItemImage {
+  width: 50px;
+  height: 50px;
+  object-fit: cover;
+  margin-right: 10px;
+}
+
+.cartItemText {
+  color: #333333;
+  font-size: 16px;
+}
+
+.orderNowButton {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.whatsappButton {
+  background-color: #4caf50;
+  color: #fff;
+  width: 100%;
+}
+
+.whatsappButton:hover {
+  background-color: #45a049;
+}
+
+.drawerListMobile {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
+
+.iconBoxMobile {
+  display: flex;
+  justify-content: center;
+  margin-top: 20px;
+}
+
+body {
+  font-family: 'Helvetica Neue', Arial, sans-serif;
+  background-color: #f9f9f9;
+  color: #333333;
+  margin: 0;
+  padding: 0;
+}
+
+h1 {
+  text-align: center;
+  color: #333333;
+  margin-bottom: 20px;
+}
+
+a {
+  text-decoration: none !important;
+  color: inherit;
+}
+
+button {
+  background-color: #4caf50;
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  text-align: center;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #388e3c;
+}
+
+/* Media Queries for Responsive Design */
+@media (max-width: 1024px) {
+  .header {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 10px 20px;
+  }
+
+  .logoTitle {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .desktopLinks {
+    display: none;
+  }
+
+  .iconContainer {
+    justify-content: space-between;
+    width: 100%;
+  }
+}
+
+@media (max-width: 600px) {
+  .header {
+    padding: 10px 15px;
+  }
+
+  .logo {
+    height: 60px;
+    width: 60px;
+  }
+
+  .navLink {
+    font-size: 14px;
+  }
+
+  .cartDropdown {
+    width: 100%;
+    left: 0;
+    right: 0;
+  }
+
+  .cartItem {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .cartItemImage {
+    margin-right: 0;
+    margin-bottom: 10px;
+  }
+
+  .cartItemText {
+    font-size: 14px;
+  }
+
+  .orderNowButton {
+    justify-content: center;
+  }
+
+  .whatsappButton {
+    width: auto;
+  }
+}
