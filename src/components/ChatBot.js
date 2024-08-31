@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
-import { Button, IconButton, TextField } from '@mui/material';
+import { Button, IconButton, TextField, CircularProgress } from '@mui/material';
 import CloseIcon from '@mui/icons-material/Close';
 import { styled } from '@mui/system';
 import axios from 'axios';
@@ -23,10 +23,12 @@ const InputContainer = styled('div')({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
+  width: '100%',
 });
 
 const FileInput = styled('input')({
   marginBottom: '10px',
+  width: '100%',
 });
 
 const ImagePreview = styled('img')({
@@ -44,6 +46,8 @@ const SendButton = styled(Button)({
   borderRadius: '4px',
   cursor: 'pointer',
   marginTop: '10px',
+  width: '100%',
+  position: 'relative',
 });
 
 const ModalContent = styled('div')({
@@ -53,11 +57,17 @@ const ModalContent = styled('div')({
   right: 'auto',
   bottom: 'auto',
   transform: 'translate(-50%, -50%)',
-  width: '400px',
+  width: '90%',
+  maxWidth: '400px',
   padding: '20px',
   borderRadius: '8px',
   boxShadow: '0 4px 8px rgba(0, 0, 0, 0.2)',
   backgroundColor: '#fff',
+  '@media (max-width: 600px)': {
+    padding: '10px',
+    width: '80%',
+    maxWidth: '320px',
+  },
 });
 
 const CloseButton = styled(IconButton)({
@@ -71,6 +81,16 @@ const Title = styled('h2')({
   fontSize: '24px',
   fontWeight: 'bold',
   textAlign: 'center',
+  '@media (max-width: 600px)': {
+    fontSize: '20px',
+  },
+});
+
+const SpinnerContainer = styled('div')({
+  display: 'flex',
+  justifyContent: 'center',
+  alignItems: 'center',
+  marginTop: '20px',
 });
 
 const ChatBot = () => {
@@ -78,6 +98,7 @@ const ChatBot = () => {
   const [inputValue, setInputValue] = useState('');
   const [email, setEmail] = useState('');
   const [image, setImage] = useState(null);
+  const [isLoading, setIsLoading] = useState(false); // State for loading spinner
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -88,6 +109,7 @@ const ChatBot = () => {
     setInputValue('');
     setEmail('');
     setImage(null);
+    setIsLoading(false); // Reset loading state
   };
 
   const handleInputChange = (e) => {
@@ -103,6 +125,8 @@ const ChatBot = () => {
       return;
     }
   
+    setIsLoading(true); // Start loading spinner
+
     const formData = new FormData();
     formData.append('customer_message', inputValue.trim());
     formData.append('email', email.trim());
@@ -112,23 +136,21 @@ const ChatBot = () => {
     }
   
     try {
-      const response = await axios.post('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/prescriptions/add', formData, {
+      const response = await axios.post('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/prescriptions/add', formData, {
         headers: {
           'Content-Type': 'multipart/form-data',
         },
       });
   
-      // Alert the user
       alert('Prescription sent successfully!');
   
-      // Send an email
       const emailData = {
         to: email,
         subject: 'Your Prescription Details',
         body: `Hi ${email}, your prescription has been received. We'll work on it and get back to you.`,
       };
   
-      await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/send-email', {
+      await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/send-email', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -140,6 +162,8 @@ const ChatBot = () => {
       closeModal();
     } catch (error) {
       console.error('Error sending prescription:', error);
+    } finally {
+      setIsLoading(false); // Stop loading spinner
     }
   };
 
@@ -174,6 +198,7 @@ const ChatBot = () => {
               label="Type a message..."
               fullWidth
               margin="normal"
+              disabled={isLoading} // Disable input when loading
             />
             <TextField
               type="email"
@@ -183,12 +208,19 @@ const ChatBot = () => {
               label="Your Email"
               fullWidth
               margin="normal"
+              disabled={isLoading} // Disable input when loading
             />
-            <FileInput type="file" onChange={handleFileChange} />
+            <FileInput type="file" onChange={handleFileChange} disabled={isLoading} />
             {image && <ImagePreview src={URL.createObjectURL(image)} alt="Uploaded" />}
-            <SendButton onClick={handleSendMessage}>
-              Send
-            </SendButton>
+            {isLoading ? (
+              <SpinnerContainer>
+                <CircularProgress />
+              </SpinnerContainer>
+            ) : (
+              <SendButton onClick={handleSendMessage}>
+                Send
+              </SendButton>
+            )}
           </InputContainer>
         </ModalContent>
       </Modal>

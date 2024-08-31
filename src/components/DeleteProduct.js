@@ -10,7 +10,7 @@ const DeleteProduct = () => {
 
     const fetchProducts = async () => {
         try {
-            const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/products/all');
+            const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/all');
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -23,7 +23,7 @@ const DeleteProduct = () => {
 
     const handleDelete = async (id) => {
         try {
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/products/delete/${id}`, {
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/delete/${id}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {

@@ -7,7 +7,7 @@ const Help = () => {
             <h1>Help</h1>
             <p>If you need assistance or have any questions, please feel free to contact us:</p>
             <ul>
-                <li>Phone: <a href="tel:+254 703 650893">+254 703 650893</a></li>
+                <li>Phone: <a href="tel:+254 727 594417">+254 727 594417</a></li>
                 <li>Email: <a href="mailto:info@joshmachpharmacy.com">info@joshmachpharmacy.com</a></li>
                 <li>Visit Us: Sultan Apartment Junction, Kikambala</li>
             </ul>

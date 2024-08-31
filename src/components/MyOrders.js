@@ -21,8 +21,8 @@ const MyOrders = () => {
 
     const fetchOrders = async () => {
         try {
-            const responseProcessing = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/email/${email}/status/processing`);
-            const responseOrdered = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/email/${email}/status/ordered`);
+            const responseProcessing = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/email/${email}/status/processing`);
+            const responseOrdered = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/email/${email}/status/ordered`);
 
             if (!responseProcessing.ok || !responseOrdered.ok) {
                 throw new Error('Failed to fetch orders');
@@ -40,7 +40,7 @@ const MyOrders = () => {
 
     const handleCompleteOrder = async (orderId) => {
         try {
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/update-status/id/${orderId}`, {
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/update-status/id/${orderId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -86,7 +86,7 @@ const MyOrders = () => {
                                     <TableCell>{order.product_name}</TableCell>
                                     <TableCell>{order.quantity}</TableCell>
                                     <TableCell>{order.price}</TableCell>
-                                    <TableCell>{(order.price * order.quantity).toFixed(2)}</TableCell>
+                                    <TableCell>{(order.price * order.quantity)}</TableCell>
                                     <TableCell>{order.order_status}</TableCell>
                                     <TableCell>
                                         {email === 'joshmachadmin2024' && phoneNumber === '0741225424' && (
@@ -125,7 +125,7 @@ const MyOrders = () => {
                                     <TableCell>{order.product_name}</TableCell>
                                     <TableCell>{order.quantity}</TableCell>
                                     <TableCell>{order.price}</TableCell>
-                                    <TableCell>{(order.price * order.quantity).toFixed(2)}</TableCell>
+                                    <TableCell>{(order.price * order.quantity)}</TableCell>
                                     <TableCell>{order.order_status}</TableCell>
                                 </TableRow>
                             ))}

@@ -7,7 +7,7 @@ const Prescription = () => {
 
     const fetchPrescriptions = async () => {
         try {
-            const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/prescriptions');
+            const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/prescriptions');
             if (!response.ok) {
                 throw new Error('Failed to fetch prescriptions');
             }
@@ -43,7 +43,7 @@ const Prescription = () => {
                                 <TableCell>{prescription.customer_email}</TableCell>
                                 <TableCell>
                                     {prescription.image_path && (
-                                        <img src={`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000${prescription.image_path}`} alt="Prescription" className="prescriptionImage" />
+                                        <img src={`https://joshmachpharmacy-e682e263652d.herokuapp.com/${prescription.image_path}`} alt="Prescription" className="prescriptionImage" />
                                     )}
                                 </TableCell>
                             </TableRow>

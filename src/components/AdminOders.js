@@ -10,7 +10,7 @@ const AdminOrders = () => {
 
     const fetchOrders = async () => {
         try {
-            const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartitems');
+            const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartitems');
             if (!response.ok) {
                 throw new Error('Failed to fetch orders');
             }
@@ -26,7 +26,7 @@ const AdminOrders = () => {
 
     const handleCompleteOrder = async (orderId) => {
         try {
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/update-status/id/${orderId}`, {
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/update-status/id/${orderId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

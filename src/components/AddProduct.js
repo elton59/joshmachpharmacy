@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import './AddProduct.css';
-import { useNavigate } from 'react-router-dom'; // Use useNavigate hook for navigation
+import CircularProgress from '@mui/material/CircularProgress';
+import { useNavigate } from 'react-router-dom'; 
 
 const AddProduct = () => {
     const [product, setProduct] = useState({
@@ -11,11 +12,12 @@ const AddProduct = () => {
         color: '',
         description: '',
         image: null,
-        category: '' // Initialize category state
+        category: ''
     });
 
     const [alert, setAlert] = useState('');
-    const navigate = useNavigate(); // Use useNavigate hook for navigation
+    const [isLoading, setIsLoading] = useState(false); // Loading state
+    const navigate = useNavigate();
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -36,10 +38,12 @@ const AddProduct = () => {
         formData.append('stock_quantity', product.stock_quantity);
         formData.append('color', product.color);
         formData.append('description', product.description);
-        formData.append('category', product.category); // Append category to formData
+        formData.append('category', product.category);
+
+        setIsLoading(true); // Start loading spinner
 
         try {
-            const uploadResponse = await axios.post('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/upload', formData, {
+            const uploadResponse = await axios.post('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -54,21 +58,23 @@ const AddProduct = () => {
                 color: product.color,
                 description: product.description,
                 image_path: imagePath,
-                category: product.category // Include category in productData
+                category: product.category 
             };
 
-            const createResponse = await axios.post('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/products/add', productData);
+            const createResponse = await axios.post('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/add', productData);
             console.log('Product created:', createResponse.data);
 
             setAlert('Product added successfully');
             setTimeout(() => {
                 setAlert('');
-                navigate('/'); // Use navigate for redirection
-            }, 2000); // Redirect after 2 seconds
+                navigate('/'); // Redirect after 2 seconds
+            }, 2000);
 
         } catch (error) {
             console.error('Error creating product:', error);
-            // Handle error as needed (e.g., show error message)
+            setAlert('Failed to add product. Please try again.');
+        } finally {
+            setIsLoading(false); // Stop loading spinner
         }
     };
 
@@ -79,33 +85,75 @@ const AddProduct = () => {
             <form onSubmit={handleSubmit}>
                 <label>
                     Product Name:
-                    <input type="text" name="product_name" value={product.product_name} onChange={handleChange} required />
+                    <input 
+                        type="text" 
+                        name="product_name" 
+                        value={product.product_name} 
+                        onChange={handleChange} 
+                        required 
+                    />
                 </label>
                 <label>
                     Price:
-                    <input type="number" name="price" value={product.price} onChange={handleChange} required />
+                    <input 
+                        type="number" 
+                        name="price" 
+                        value={product.price} 
+                        onChange={handleChange} 
+                        required 
+                    />
                 </label>
                 <label>
                     Stock Quantity:
-                    <input type="number" name="stock_quantity" value={product.stock_quantity} onChange={handleChange} required />
+                    <input 
+                        type="number" 
+                        name="stock_quantity" 
+                        value={product.stock_quantity} 
+                        onChange={handleChange} 
+                        required 
+                    />
                 </label>
                 <label>
                     Color:
-                    <input type="text" name="color" value={product.color} onChange={handleChange} />
+                    <input 
+                        type="text" 
+                        name="color" 
+                        value={product.color} 
+                        onChange={handleChange} 
+                    />
                 </label>
                 <label>
                     Description:
-                    <textarea name="description" value={product.description} onChange={handleChange} required />
+                    <textarea 
+                        name="description" 
+                        value={product.description} 
+                        onChange={handleChange} 
+                        required 
+                    />
                 </label>
                 <label>
-                    Category: {/* Input field for category */}
-                    <input type="text" name="category" value={product.category} onChange={handleChange} />
+                    Category:
+                    <input 
+                        type="text" 
+                        name="category" 
+                        value={product.category} 
+                        onChange={handleChange} 
+                    />
                 </label>
                 <label>
                     Image:
-                    <input type="file" accept="image/*" onChange={handleImageChange} required />
+                    <input 
+                        type="file" 
+                        accept="image/*" 
+                        onChange={handleImageChange} 
+                        required 
+                    />
                 </label>
-                <button type="submit">Add Product</button>
+                <div className="submit-section">
+                    <button type="submit" disabled={isLoading}>
+                        {isLoading ? <CircularProgress size={24} /> : 'Add Product'}
+                    </button>
+                </div>
             </form>
         </div>
     );

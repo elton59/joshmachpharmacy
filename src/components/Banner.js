@@ -28,10 +28,10 @@ const Banner = () => {
       <div className="carousel-item">
         <img src={require('../component_photos/image2.jpg')} alt="Health 2" />
         <div className="banner-text">
-          <h2>Discover Natural Remedies</h2>
+        <h2>Experience Personalized Service</h2>
           <p>
-            Embrace Nature's Solutions for a Healthier You<br/>
-            ABOUT US: At JoshMach Pharmacy, we believe in the power of natural remedies to promote wellness. Explore our diverse selection of natural supplements and health products, carefully curated to help you lead a healthier lifestyle.
+            Your Health is Our Priority<br/>
+            We prioritize your health and satisfaction above all else. Our knowledgeable and friendly team is dedicated to providing you with personalized service, expert guidance, and the care you deserve.
           </p>
           <button>SHOP NOW</button>
         </div>

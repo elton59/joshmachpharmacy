@@ -15,7 +15,7 @@ const ProductDescription = () => {
     useEffect(() => {
         const fetchSessionId = async () => {
             try {
-                const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/create-session');
+                const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/create-session');
                 if (!response.ok) {
                     throw new Error('Failed to fetch session ID');
                 }
@@ -42,7 +42,7 @@ const ProductDescription = () => {
     const createCart = useCallback(async (session_id) => {
         try {
             console.log('Creating cart with session ID:', session_id);
-            const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/carts', {
+            const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/carts', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -66,7 +66,7 @@ const ProductDescription = () => {
     const fetchCartId = useCallback(async (session_id) => {
         try {
             console.log('Fetching cart ID with session ID:', session_id);
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/carts/session/${session_id}`);
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/carts/session/${session_id}`);
             const data = await response.json();
             console.log('Fetch cart ID response:', data);
             if (response.ok && data.length > 0) {
@@ -84,7 +84,7 @@ const ProductDescription = () => {
     const fetchProductDetails = useCallback(async (productId) => {
         try {
             console.log('Fetching product details for product ID:', productId);
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/products/details?id=${productId}`);
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/details?id=${productId}`);
             const data = await response.json();
             console.log('Fetch product details response:', data);
             if (!response.ok) {
@@ -100,7 +100,7 @@ const ProductDescription = () => {
     const fetchRelatedProducts = useCallback(async (category, currentProductId) => {
         try {
             console.log('Fetching related products for category:', category);
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/products/by-category?category=${category}`);
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/by-category?category=${category}`);
             const data = await response.json();
             console.log('Fetch related products response:', data);
             if (!response.ok) {
@@ -121,7 +121,7 @@ const ProductDescription = () => {
 
         try {
             console.log('Adding to cart:', {
-                cart_id: cartId,
+                cart_id:cartId,
                 product_id: product.id,
                 quantity,
                 price: product.price,
@@ -129,7 +129,7 @@ const ProductDescription = () => {
                 phone_number: phoneNumber,
                 attributes: { size: 'M', color: 'red' }
             });
-            const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems', {
+            const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -144,6 +144,7 @@ const ProductDescription = () => {
                     attributes: JSON.stringify({ size: 'M', color: 'red' })
                 })
             });
+            
             const data = await response.json();
             console.log('Add to cart response:', data);
             if (!response.ok) {
@@ -161,7 +162,7 @@ const ProductDescription = () => {
     const fetchCartItemsCount = useCallback(async (cartId) => {
         try {
             console.log('Fetching cart items count for cart ID:', cartId);
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/count?cart_id=${cartId}`);
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/count?cart_id=${cartId}`);
             const data = await response.json();
             console.log('Fetch cart items count response:', data);
             if (!response.ok) {
@@ -182,7 +183,7 @@ const ProductDescription = () => {
     return (
         <div className="product-description-container">
             <div className="product-details">
-                <img src={`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000${product.image_path}`} alt={product.product_name} className="product-image" />
+                <img src={`https://joshmachpharmacy-e682e263652d.herokuapp.com${product.image_path}`} alt={product.product_name} className="product-image" />
                 <div className="product-info">
                     <span className="product-tag">{product.category}</span>
                     <div className="product-pricing">
@@ -209,7 +210,7 @@ const ProductDescription = () => {
                     {relatedProducts.length > 0 ? (
                         relatedProducts.map(relatedProduct => (
                             <div key={relatedProduct.id} className="related-product-item" onClick={() => fetchProductDetails(relatedProduct.id)}>
-                                <img src={`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000${relatedProduct.image_path}`} alt={`Related Product ${relatedProduct.id}`} />
+                                <img src={`https://joshmachpharmacy-e682e263652d.herokuapp.com/${relatedProduct.image_path}`} alt={`Related Product ${relatedProduct.id}`} />
                                 <p>{relatedProduct.product_name}</p>
                             </div>
                         ))

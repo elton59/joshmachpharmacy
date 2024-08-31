@@ -18,6 +18,8 @@ import { Link as RouterLink } from 'react-router-dom';
 import { useMediaQuery, useTheme, Button, Dialog, DialogActions, DialogContent, DialogTitle, TextField } from '@mui/material';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import DeleteIcon from '@mui/icons-material/Delete';
+import CloseIcon from '@mui/icons-material/Close';
+
 import './Header.css';
 
 const Header = () => {
@@ -34,7 +36,7 @@ const Header = () => {
 
     const fetchSessionInfo = useCallback(async () => {
         try {
-            const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/create-session');
+            const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/create-session');
             if (!response.ok) {
                 throw new Error('Failed to fetch session information');
             }
@@ -48,7 +50,7 @@ const Header = () => {
 
     const fetchProductDetails = async (productId) => {
         try {
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/products/details?id=${productId}`);
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/details?id=${productId}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch product details');
             }
@@ -62,7 +64,7 @@ const Header = () => {
     const fetchCartItemsByEmail = useCallback(async (email) => {
         try {
             const order_status = 'pending'; // Set order status to 'pending'
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/email/${email}/status/${order_status}`);
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/email/${email}/status/${order_status}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch cart items by email');
             }
@@ -85,7 +87,7 @@ const Header = () => {
 
     const fetchCartItemsById = useCallback(async (cartId) => {
         try {
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/${cartId}`);
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/${cartId}`);
             if (!response.ok) {
                 throw new Error('Failed to fetch cart items by ID');
             }
@@ -123,15 +125,15 @@ const Header = () => {
 
     const handleOrderNow = async () => {
         try {
-            const orderDetails = cartItems.map(item => `${item.product_name} (x${item.quantity}) - Ksh${item.price.toFixed(2)}`).join('\n');
-            const totalAmount = calculateTotal().toFixed(2);
+            const orderDetails = cartItems.map(item => `${item.product_name} (x${item.quantity}) - Ksh${item.price}`).join('\n');
+            const totalAmount = calculateTotal();
             const emailData = {
                 to: email,
                 subject: 'Your Order Details',
                 body: `Your Order For the following items have been received:\n\n${orderDetails}\n\n we'll process it and give you a :\n\nYour contact details:\nEmail: ${email}\nPhone Number: ${phoneNumber}\: \n\n Total Ksh${totalAmount}\n\nThank you for shopping with us!`
             };
 
-            const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/send-email', {
+            const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/send-email', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -143,7 +145,7 @@ const Header = () => {
                 throw new Error('Failed to send email');
             }
             const statusUpdatePromises = cartItems.map(item => {
-                return fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/update-status/id/${item.id}`, {
+                return fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/update-status/id/${item.id}`, {
                     method: 'PUT',
                     headers: {
                         'Content-Type': 'application/json',
@@ -207,10 +209,10 @@ const Header = () => {
             <List>
                 {cartItems.map((item) => (
                     <ListItem key={item.id} className="cartItem">
-                        <img src={`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000${item.image_path}`} alt={item.product_name} className="cartItemImage" />
+                        <img src={`https://joshmachpharmacy-e682e263652d.herokuapp.com${item.image_path}`} alt={item.product_name} className="cartItemImage" />
                         <ListItemText
                             primary={<span className="cartItemText">{item.product_name}</span>}
-                            secondary={`Quantity: ${item.quantity} | KSH ${item.price.toFixed(2)}`}
+                            secondary={`Quantity: ${item.quantity} | KSH ${item.price}`}
                         />
                         <IconButton edge="end" aria-label="delete" onClick={() => handleDeleteCartItem(item.id)}>
                             <DeleteIcon />
@@ -219,7 +221,7 @@ const Header = () => {
                 ))}
             </List>
             <Typography variant="subtitle1">
-                <span className="cartItemText">Grand Total: Ksh{calculateTotal().toFixed(2)}</span>
+                <span className="cartItemText">Grand Total: Ksh{calculateTotal()}</span>
             </Typography>
             <Box className="orderNowButton">
                 <Button variant="contained" className="whatsappButton" onClick={handleOrderNow}>
@@ -230,7 +232,7 @@ const Header = () => {
     );
     const handleDeleteCartItem = async (itemId) => {
         try {
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/cartItems/${cartId}/${itemId}`, {
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems/${itemId}`, {
                 method: 'DELETE',
             });
             if (!response.ok) {
@@ -264,21 +266,45 @@ const Header = () => {
                     <img src={require('../component_photos/logo.jpg')}  alt="Logo" className="logo" />
                     </RouterLink>
                 </Typography>
-                <Drawer anchor="left" open={drawerOpen} onClose={toggleDrawer(false)}>
-    <Box sx={{ width: 250 }} role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+                <Drawer
+    anchor="left"
+    open={drawerOpen}
+    onClose={toggleDrawer(false)}
+    sx={{
+        '& .MuiDrawer-paper': {
+            background: 'linear-gradient(90deg, #e0eafc, #cfdef3)',
+            color: '#333333',
+        },
+    }}
+>
+    <Box sx={{ width: 250, height: '100%', overflowY: 'auto' }}  role="presentation" onClick={toggleDrawer(false)} onKeyDown={toggleDrawer(false)}>
+    <IconButton
+            edge="start"
+            color="inherit"
+            aria-label="close"
+            onClick={toggleDrawer(false)}
+            sx={{
+                position: 'absolute',
+                top: 10,
+                right: 10,
+            }}
+        >
+            <CloseIcon />
+        </IconButton>
         <List>
             <ListItem button component={RouterLink} to="/">
                 <ListItemText primary="Home" />
             </ListItem>
-            <ListItem button component={RouterLink} to="/products">
-                <ListItemText primary="Products" />
+            <ListItem button component={RouterLink} to="/aboutus">
+                <ListItemText primary="About Us" />
+            </ListItem>
+            <ListItem button component={RouterLink} to="/help">
+                <ListItemText primary="Help" />
             </ListItem>
             <ListItem button component={RouterLink} to="/myorders">
                 <ListItemText primary="My Orders" />
             </ListItem>
-            <ListItem button component={RouterLink} to="/about">
-                <ListItemText primary="About Us" />
-            </ListItem>
+           
         </List>
         <Box sx={{ position: 'absolute', bottom: 0, width: '100%', display: 'flex', justifyContent: 'space-evenly', padding: '10px 0' }}>
             <IconButton href="https://www.facebook.com/" target="_blank" rel="noopener noreferrer">
@@ -298,7 +324,22 @@ const Header = () => {
 <Typography variant="h6" className="title">
 JoshMachPharmacy
 </Typography>
+
 </Box>
+{isMobile && (
+<IconButton
+color="inherit"
+className="iconButton"
+sx={{ ml: 1 }}
+onClick={toggleCartDropdown}
+aria-controls="cart-menu"
+aria-haspopup="true"
+>   
+<Badge badgeContent={cartItems.length} color="secondary">
+<ShoppingCartIcon />
+{cartDropdownOpen && cartDropdown}
+</Badge>
+</IconButton>)}
 {!isMobile && (
 <Box className="desktopLinks">
 <RouterLink to="/" className="navLink">
@@ -331,6 +372,7 @@ onClick={toggleCartDropdown}
 aria-controls="cart-menu"
 aria-haspopup="true"
 >
+    
 <Badge badgeContent={cartItems.length} color="secondary">
 <ShoppingCartIcon />
 </Badge>

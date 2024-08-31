@@ -11,7 +11,7 @@ const Products = () => {
     useEffect(() => {
         const fetchProducts = async () => {
             try {
-                const response = await fetch('http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/products/all');
+                const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/all');
                 const data = await response.json();
                 setProducts(data);
             } catch (error) {
@@ -28,7 +28,7 @@ const Products = () => {
 
     const handleProductClick = async (id) => {
         try {
-            const response = await fetch(`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000/api/products/details?id=${id}`);
+            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/details?id=${id}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
@@ -48,7 +48,7 @@ const Products = () => {
             {products.map(product => (
                 <div key={product.id} className="product" onClick={() => handleProductClick(product.id)}>
                     {product.discount && <div className="sale-badge">Save {product.discount}%</div>}
-                    <img src={`http://https://joshmachpharmacy-e682e263652d.herokuapp.com:4000${product.image_path}`} alt={product.product_name} />
+                    <img src={`https://joshmachpharmacy-e682e263652d.herokuapp.com${product.image_path}`} alt={product.product_name} />
                     <div className="product-info">
                         <span className="category">{product.category}</span>
                         <span className="name">{product.product_name}</span>

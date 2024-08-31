@@ -81,7 +81,91 @@
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
   z-index: 100;
 }
+@media (max-width: 600px) {
+  .header {
+    padding: 10px 15px;
+  }
 
+  .logo {
+    height: 60px;
+    width: 60px;
+  }
+
+  .navLink {
+    font-size: 14px;
+  }
+
+  .cartDropdown {
+    width: 100%;
+    left: 0;
+    right: 0;
+    padding: 10px 15px;
+    box-shadow: none; /* Remove shadow for simplicity */
+    border: none; /* Remove border */
+  }
+
+  .cartItem {
+    flex-direction: column;
+    align-items: flex-start;
+    margin-bottom: 15px;
+  }
+
+  .cartItemImage {
+    margin-right: 0;
+    margin-bottom: 10px;
+    width: 40px; /* Smaller image */
+    height: 40px;
+  }
+
+  .cartItemText {
+    font-size: 14px;
+  }
+
+  .orderNowButton {
+    justify-content: center;
+    width: 100%; /* Ensure button takes full width */
+  }
+
+  .whatsappButton {
+    width: 100%; /* Full-width button for better UX */
+    text-align: center;
+  }
+  @media (max-width: 600px) {
+    .cartDropdown {
+      width: 90%; /* Increase the width */
+      position: fixed; /* Make the dropdown fixed */
+      top: 20%; /* Center it vertically */
+      left: 50%; /* Center it horizontally */
+      transform: translate(-10%, -50%); /* Offset the position by half its own size to center */
+      z-index: 2000; /* Ensure it appears above other elements */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3); /* Add a shadow for depth */
+      padding: 15px; /* Add padding to improve layout */
+      border-radius: 10px; /* Optional: Add rounded corners */
+      background-color: #fff; /* Ensure background is white */
+    }
+  
+  
+    .cartItem {
+      flex-direction: column;
+      align-items: flex-start;
+      margin-bottom: 15px;
+    }
+  
+    .cartItemImage {
+      margin-right: 0;
+      margin-bottom: 10px;
+      width: 50px; /* Adjust image size if necessary */
+      height: 50px;
+    }
+  
+    .cartItemText {
+      font-size: 14px;
+    }
+  
+    .orderNowButton {
+      justify-content: flex-end;
+    }
+  }}
 .cartDropdown::before {
   content: '';
   position: absolute;
@@ -244,4 +328,5 @@ button:hover {
   .whatsappButton {
     width: auto;
   }
+
 }
