@@ -129,7 +129,7 @@ const ProductDescription = () => {
                 phone_number: phoneNumber,
                 attributes: { size: 'M', color: 'red' }
             });
-            const response = await fetch('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems', {
+            const response = await fetch('https://https://joshmachpharmacy-e682e263652d.herokuapp.com/api/cartItems', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
@@ -183,7 +183,7 @@ const ProductDescription = () => {
     return (
         <div className="product-description-container">
             <div className="product-details">
-                <img src={`https://joshmachpharmacy-e682e263652d.herokuapp.com${product.image_path}`} alt={product.product_name} className="product-image" />
+                <img src={`${product.image_path}`} alt={product.product_name} className="product-image" />
                 <div className="product-info">
                     <span className="product-tag">{product.category}</span>
                     <div className="product-pricing">

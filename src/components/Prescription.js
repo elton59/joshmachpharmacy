@@ -43,7 +43,7 @@ const Prescription = () => {
                                 <TableCell>{prescription.customer_email}</TableCell>
                                 <TableCell>
                                     {prescription.image_path && (
-                                        <img src={`https://joshmachpharmacy-e682e263652d.herokuapp.com/${prescription.image_path}`} alt="Prescription" className="prescriptionImage" />
+                                        <img src={`${prescription.image_path}`} alt="Prescription" className="prescriptionImage" />
                                     )}
                                 </TableCell>
                             </TableRow>

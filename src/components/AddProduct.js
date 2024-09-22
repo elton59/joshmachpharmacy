@@ -43,7 +43,7 @@ const AddProduct = () => {
         setIsLoading(true); // Start loading spinner
 
         try {
-            const uploadResponse = await axios.post('http://localhost:4000/api/upload', formData, {
+            const uploadResponse = await axios.post('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/upload', formData, {
                 headers: {
                     'Content-Type': 'multipart/form-data'
                 }
@@ -61,7 +61,7 @@ const AddProduct = () => {
                 category: product.category 
             };
 
-            const createResponse = await axios.post('http://localhost:4000/api/products/add', productData);
+            const createResponse = await axios.post('https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/add', productData);
             console.log('Product created:', createResponse.data);
 
             setAlert('Product added successfully');
