@@ -29,7 +29,7 @@ const Products = () => {
 
     const handleProductClick = async (id) => {
         try {
-            const response = await fetch(`https://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/details?id=${id}`);
+            const response = await fetch(`http://joshmachpharmacy-e682e263652d.herokuapp.com/api/products/details?id=${id}`);
             if (!response.ok) {
                 throw new Error(`HTTP error! status: ${response.status}`);
             }
